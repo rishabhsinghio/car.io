@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3ixqkc6k13yi"]
+
+[ext_resource type="Script" uid="uid://bi65kta017fob" path="res://addons/gevp/scripts/vehicle_controllergd.gd" id="1_vqaod"]
+[ext_resource type="Texture2D" uid="uid://caglo6qs3r0hx" path="res://icon.svg" id="2_hd0uj"]
+
+[node name="VehicleController" type="Node3D"]
+script = ExtResource("1_vqaod")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(39, 464)
+texture_normal = ExtResource("2_hd0uj")
+action = "Steer Left"
+
+[node name="TouchScreenButton2" type="TouchScreenButton" parent="."]
+position = Vector2(214, 459)
+texture_normal = ExtResource("2_hd0uj")
+action = "Steer Right"
+
+[node name="TouchScreenButton3" type="TouchScreenButton" parent="."]
+position = Vector2(981, 433)
+texture_normal = ExtResource("2_hd0uj")
+action = "Brakes"
+
+[node name="TouchScreenButton4" type="TouchScreenButton" parent="."]
+position = Vector2(980, 276)
+texture_normal = ExtResource("2_hd0uj")
+action = "Throttle"

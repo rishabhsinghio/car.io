@@ -1,0 +1,145 @@
+[gd_scene load_steps=12 format=3 uid="uid://33pkwjmduy8n"]
+
+[ext_resource type="Script" uid="uid://bi65kta017fob" path="res://addons/gevp/scripts/vehicle_controllergd.gd" id="1_jtldb"]
+[ext_resource type="Texture2D" uid="uid://b2ffevvlhf831" path="res://icon.svg" id="2_3mrxu"]
+[ext_resource type="Script" uid="uid://b5mbeqccry341" path="res://addons/gevp/scripts/camera.gd" id="4_4clw4"]
+[ext_resource type="Texture2D" uid="uid://devajqq5ckshh" path="res://assets/touch_assets/IMG_20251223_173255-removebg-preview.png" id="4_sslqg"]
+[ext_resource type="Script" uid="uid://c6bteqrk6v3fg" path="res://addons/gevp/scripts/gui.gd" id="5_6gcpt"]
+[ext_resource type="Script" uid="uid://ckwlx5kc7inh8" path="res://addons/Virtual Steering/steering.gd" id="5_kxndi"]
+[ext_resource type="Texture2D" uid="uid://18ddqk4od2r" path="res://assets/touch_assets/IMG_20251223_173229-removebg-preview.png" id="5_tnr0n"]
+[ext_resource type="Texture2D" uid="uid://cqfjxr4hvfixo" path="res://assets/touch_assets/bmw-car-lexus-gs-steering-wheel-bmw-steering-wheel-Photoroom.png" id="6_is4l4"]
+[ext_resource type="PackedScene" uid="uid://b2hlchrj4h2b7" path="res://addons/gevp/scenes/engine_sound.tscn" id="7_kcati"]
+[ext_resource type="PackedScene" uid="uid://c15tb7iki0vvm" path="res://bmw.tscn" id="7_vuxys"]
+[ext_resource type="Texture2D" uid="uid://k84n2i3hyj7w" path="res://assets/touch_assets/av7801257c459e42a24b5.png" id="8_vm2gp"]
+
+[node name="VehicleController" type="Node3D" node_paths=PackedStringArray("vehicle_node")]
+script = ExtResource("1_jtldb")
+vehicle_node = NodePath("VehicleRigidBody")
+
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("vehicle")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 647.0
+offset_top = 13.0
+offset_right = 928.0
+offset_bottom = 136.0
+script = ExtResource("5_6gcpt")
+vehicle = NodePath("../VehicleRigidBody")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Speed" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="RPM" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Gear" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="XP" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="TouchInput" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 112.0
+offset_bottom = 86.0
+
+[node name="left" type="TouchScreenButton" parent="TouchInput"]
+visible = false
+position = Vector2(49, 477)
+texture_normal = ExtResource("2_3mrxu")
+action = "Steer Left"
+
+[node name="right" type="TouchScreenButton" parent="TouchInput"]
+visible = false
+position = Vector2(224, 472)
+texture_normal = ExtResource("2_3mrxu")
+action = "Steer Right"
+
+[node name="brake" type="TouchScreenButton" parent="TouchInput"]
+position = Vector2(770, 463.00003)
+scale = Vector2(0.41626793, 0.35674158)
+texture_normal = ExtResource("4_sslqg")
+action = "Brakes"
+
+[node name="throttle" type="TouchScreenButton" parent="TouchInput"]
+position = Vector2(965, 334.00003)
+scale = Vector2(0.5472311, 0.57505286)
+texture_normal = ExtResource("5_tnr0n")
+texture_pressed = ExtResource("5_tnr0n")
+action = "Throttle"
+
+[node name="clutch" type="TouchScreenButton" parent="TouchInput"]
+visible = false
+position = Vector2(981, 181.00002)
+scale = Vector2(0.8203125, 0.4296875)
+texture_normal = ExtResource("2_3mrxu")
+action = "Clutch"
+
+[node name="toggle Transmission" type="TouchScreenButton" parent="TouchInput"]
+visible = false
+position = Vector2(1017, 28)
+scale = Vector2(0.43750036, 0.4296875)
+texture_normal = ExtResource("2_3mrxu")
+action = "Toggle Transmission"
+
+[node name="g_up" type="TouchScreenButton" parent="TouchInput"]
+visible = false
+position = Vector2(983, 122)
+scale = Vector2(0.34374988, 0.35937497)
+texture_normal = ExtResource("2_3mrxu")
+action = "Shift Up"
+
+[node name="g_down" type="TouchScreenButton" parent="TouchInput"]
+visible = false
+position = Vector2(1048, 122)
+scale = Vector2(0.34374988, 0.35937497)
+texture_normal = ExtResource("2_3mrxu")
+action = "Shift Down"
+
+[node name="VirtualSteering" type="TextureRect" parent="TouchInput"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = 186.0
+offset_right = 315.0
+offset_bottom = 514.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(161, 164)
+texture = ExtResource("6_is4l4")
+expand_mode = 1
+script = ExtResource("5_kxndi")
+
+[node name="cam switch" type="TouchScreenButton" parent="TouchInput"]
+position = Vector2(998.00006, -2.000001)
+scale = Vector2(0.25714284, 0.24107146)
+texture_normal = ExtResource("8_vm2gp")
+action = "Cam Switch"
+
+[node name="VehicleRigidBody" parent="." instance=ExtResource("7_vuxys")]
+
+[node name="driver seat" type="Node3D" parent="VehicleRigidBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.285, 0.897, 0.16)
+
+[node name="EngineSound" parent="VehicleRigidBody" node_paths=PackedStringArray("vehicle") instance=ExtResource("7_kcati")]
+vehicle = NodePath("..")
+sample_rpm = 2000.0
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("cockpit_node", "follow_this")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 2, 5)
+script = ExtResource("4_4clw4")
+cockpit_node = NodePath("../VehicleRigidBody/driver seat")
+follow_this = NodePath("../VehicleRigidBody")
